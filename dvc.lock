@@ -1,0 +1,20 @@
+schema: '2.0'
+stages:
+  tiler:
+    cmd: C:\Python37\python.exe ..\..\tools\Tiler\tiler.py
+    deps:
+    - path: ..\..\tools\Tiler\tiler.py
+      md5: bf45eeb791e49a20914d96c465ffc33a
+      size: 4327
+    - path: ..\raw\environment
+      md5: 5f5f16344c5528b66b51430b0ad8a53f.dir
+      size: 112009
+      nfiles: 2
+    - path: ..\raw\inventory
+      md5: efdd5481cdb2fdd51a62832a08ce5ae9.dir
+      size: 97417
+      nfiles: 5
+    outs:
+    - path: ..\..\logs\tiler_log.txt
+      md5: f282d67922c358749ebb611f57f90b5f
+      size: 289
