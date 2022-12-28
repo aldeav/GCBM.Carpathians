@@ -44,3 +44,30 @@ stages:
     - path: logs\recliner_log.txt
       md5: 575f44e3235e469da7e2ff1671b932b3
       size: 1425
+  update_gcbm_configuration:
+    cmd: update_gcbm_configuration.bat
+    deps:
+    - path: ..\input_database\gcbm_input.db
+      md5: 1b814815bf13da736ac194b7adae4545
+      size: 1536000
+    - path: ..\layers\tiled
+      md5: d4797d7b5b7c940a60572e33b8481549.dir
+      size: 73166
+      nfiles: 8
+    - path: ..\logs\recliner_log.txt
+      md5: 575f44e3235e469da7e2ff1671b932b3
+      size: 1425
+    - path: ..\tools\tiler\update_gcbm_config.py
+      md5: 3e04cbc0ee3588cc13f711750b8cda1e
+      size: 18002
+    - path: templates
+      md5: d872ca059781e4cb4a77e9c0e17915c3.dir
+      size: 60895
+      nfiles: 8
+    - path: update_gcbm_configuration.bat
+      md5: 357408ed6c55d8b0cf29a6fa4eb5c28c
+      size: 1023
+    outs:
+    - path: ..\logs\update_gcbm_config.log
+      md5: e38f055d2ca914502c9aec2beb8bd9d4
+      size: 614

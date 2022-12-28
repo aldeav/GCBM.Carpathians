@@ -20,3 +20,15 @@ stages:
     - input_database\gcbm_input.db
     outs:
     - logs\recliner_log.txt
+  update_gcbm_configuration:
+    cmd: update_gcbm_configuration.bat
+    wdir: Standalone_GCBM\gcbm_project
+    deps:
+    - ..\logs\recliner_log.txt
+    - update_gcbm_configuration.bat
+    - ..\tools\tiler\update_gcbm_config.py
+    - templates
+    - ..\layers\tiled
+    - ..\input_database\gcbm_input.db
+    outs:
+    - ..\logs\update_gcbm_config.log
