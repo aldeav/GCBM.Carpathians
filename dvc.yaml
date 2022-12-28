@@ -32,3 +32,16 @@ stages:
     - ..\input_database\gcbm_input.db
     outs:
     - ..\logs\update_gcbm_config.log
+  run_gcbm:
+    cmd: run_gcbm.bat
+    wdir: Standalone_GCBM\gcbm_project
+    deps:
+    - ..\logs\update_gcbm_config.log
+    - run_gcbm.bat
+    - ..\tools\GCBM\moja.cli.exe
+    - gcbm_config.cfg
+    - provider_config.json
+    - ..\input_database\gcbm_input.db
+    - output\gcbm_output.db
+    outs:
+    - ..\logs\Moja_Debug.log

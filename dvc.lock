@@ -71,3 +71,31 @@ stages:
     - path: ..\logs\update_gcbm_config.log
       md5: e38f055d2ca914502c9aec2beb8bd9d4
       size: 614
+  run_gcbm:
+    cmd: run_gcbm.bat
+    deps:
+    - path: ..\input_database\gcbm_input.db
+      md5: 1b814815bf13da736ac194b7adae4545
+      size: 1536000
+    - path: ..\logs\update_gcbm_config.log
+      md5: e38f055d2ca914502c9aec2beb8bd9d4
+      size: 614
+    - path: ..\tools\GCBM\moja.cli.exe
+      md5: 22ea736fd836612c2d9a8330572cdcff
+      size: 125440
+    - path: gcbm_config.cfg
+      md5: 4ba9c157d6b3d8462bae8be993063fcc
+      size: 176
+    - path: output\gcbm_output.db
+      md5: 15848d09732ec202bff6dd3e5990bb72
+      size: 249856
+    - path: provider_config.json
+      md5: 73ea905de1ec488f940f9fec4a3189c4
+      size: 978
+    - path: run_gcbm.bat
+      md5: 14f3eb60ea3082375b89eda0f834e987
+      size: 774
+    outs:
+    - path: ..\logs\Moja_Debug.log
+      md5: 6e2e7fdd72bf2dce08ba0953e8880cfd
+      size: 1664190
