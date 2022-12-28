@@ -123,3 +123,29 @@ stages:
       md5: a5b2fc694501f0a9fb43904a9960d9a8.dir
       size: 43828971
       nfiles: 231
+  compile_results:
+    cmd: C:\Python37\python.exe compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db
+      --output_db sqlite:///../../processed_output/compiled_gcbm_output.db >> ..\..\logs\compile_results.log
+    deps:
+    - path: ..\..\gcbm_project\output\gcbm_output.db
+      md5: 4392a63f2708bf203a61a4019391f214
+      size: 720896
+    - path: ..\..\logs\create_tiffs.log
+      md5: 36b39e29b15fcf855c6700661c30e192
+      size: 15690
+    - path: ..\..\processed_output\compiled_gcbm_output.db
+      md5: 07ce742eed23bc09ff5ab703a11f74f0
+      size: 413696
+    - path: compileGCBMResults.bat
+      md5: 495d2830357c57c216242c7d1233c266
+      size: 536
+    - path: compileresults.json
+      md5: c1664af923128ae8641b521fc330f439
+      size: 17854
+    - path: compileresults.py
+      md5: da1f6e4096059269778566aac39d4c72
+      size: 14135
+    outs:
+    - path: ..\..\logs\compile_results.log
+      md5: 07aec62cb1ddc7d40cc3c3b17c42697f
+      size: 1656

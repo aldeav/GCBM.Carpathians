@@ -56,3 +56,15 @@ stages:
     outs:
     - ..\..\logs\create_tiffs.log
     - ..\..\processed_output\spatial
+  compile_results:
+    cmd: C:\Python37\python.exe compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db >> ..\..\logs\compile_results.log
+    wdir: Standalone_GCBM\tools\CompileGCBMResults
+    deps:
+    - ..\..\logs\create_tiffs.log
+    - compileGCBMResults.bat
+    - compileresults.py
+    - ..\..\gcbm_project\output\gcbm_output.db
+    - compileresults.json
+    - ..\..\processed_output\compiled_gcbm_output.db
+    outs:
+    - ..\..\logs\compile_results.log
