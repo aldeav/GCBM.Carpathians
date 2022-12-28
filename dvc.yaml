@@ -45,3 +45,14 @@ stages:
     - output\gcbm_output.db
     outs:
     - ..\logs\Moja_Debug.log
+  create_tiffs:
+    cmd: create_tiffs.bat
+    wdir: Standalone_GCBM\tools\CompileGCBMSpatialOutput
+    deps:
+    - ..\..\logs\Moja_Debug.log
+    - create_tiffs.bat
+    - create_tiffs.py
+    - ..\..\gcbm_project\output
+    outs:
+    - ..\..\logs\create_tiffs.log
+    - ..\..\processed_output\spatial

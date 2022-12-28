@@ -99,3 +99,27 @@ stages:
     - path: ..\logs\Moja_Debug.log
       md5: 6e2e7fdd72bf2dce08ba0953e8880cfd
       size: 1664190
+  create_tiffs:
+    cmd: create_tiffs.bat
+    deps:
+    - path: ..\..\gcbm_project\output
+      md5: 321b0be629f66ffe1aae63e91b24f8b7.dir
+      size: 1506620
+      nfiles: 1762
+    - path: ..\..\logs\Moja_Debug.log
+      md5: 6e2e7fdd72bf2dce08ba0953e8880cfd
+      size: 1664190
+    - path: create_tiffs.bat
+      md5: b2db383968c07c559a29e00ef1debac9
+      size: 1019
+    - path: create_tiffs.py
+      md5: 24fe644eb30b67b82ea38f3c6e6211ad
+      size: 5675
+    outs:
+    - path: ..\..\logs\create_tiffs.log
+      md5: 36b39e29b15fcf855c6700661c30e192
+      size: 15690
+    - path: ..\..\processed_output\spatial
+      md5: a5b2fc694501f0a9fb43904a9960d9a8.dir
+      size: 43828971
+      nfiles: 231
