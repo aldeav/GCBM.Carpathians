@@ -8,3 +8,15 @@ stages:
     - ..\raw\inventory
     outs:
     - ..\..\logs\tiler_log.txt
+  recliner2gcbm_x64:
+    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json >> logs\recliner_log.txt
+    wdir: Standalone_GCBM
+    deps:
+    - logs\tiler_log.txt
+    - tools\recliner2gcbm-x64\recliner2gcbm.exe
+    - input_database\recliner2gcbm_config.json
+    - input_database\ArchiveIndex_Beta_Install.mdb
+    - input_database\Growth_Curves.csv
+    - input_database\gcbm_input.db
+    outs:
+    - logs\recliner_log.txt

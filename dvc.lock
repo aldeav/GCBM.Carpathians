@@ -18,3 +18,29 @@ stages:
     - path: ..\..\logs\tiler_log.txt
       md5: f282d67922c358749ebb611f57f90b5f
       size: 289
+  recliner2gcbm_x64:
+    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json
+      >> logs\recliner_log.txt
+    deps:
+    - path: input_database\ArchiveIndex_Beta_Install.mdb
+      md5: 9b2d736fff420a077e08f9ff00802af6
+      size: 3817472
+    - path: input_database\Growth_Curves.csv
+      md5: 865daf88474e6cb9f04524ea673eb539
+      size: 19415
+    - path: input_database\gcbm_input.db
+      md5: 1b814815bf13da736ac194b7adae4545
+      size: 1536000
+    - path: input_database\recliner2gcbm_config.json
+      md5: 61351afc14f468a344c475705e6578ff
+      size: 6251
+    - path: logs\tiler_log.txt
+      md5: f282d67922c358749ebb611f57f90b5f
+      size: 289
+    - path: tools\recliner2gcbm-x64\recliner2gcbm.exe
+      md5: a45c702ad1c9aff92edc6493cff99450
+      size: 6656
+    outs:
+    - path: logs\recliner_log.txt
+      md5: 575f44e3235e469da7e2ff1671b932b3
+      size: 1425
