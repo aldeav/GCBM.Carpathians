@@ -9,8 +9,7 @@ stages:
     outs:
     - ..\..\logs\tiler_log.txt
   recliner2gcbm_x64:
-    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json
-      >> logs\recliner_log.txt
+    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json >> logs\recliner_log.txt
     wdir: Standalone_GCBM
     deps:
     - logs\tiler_log.txt
@@ -42,6 +41,8 @@ stages:
     - ..\tools\GCBM\moja.cli.exe
     - gcbm_config.cfg
     - provider_config.json
+    - ..\layers\tiled\LifeZone_moja.tiff
+    - ..\layers\tiled\mean_annual_temperature_moja.tiff
     - ..\input_database\gcbm_input.db
     - output\gcbm_output.db
     outs:
