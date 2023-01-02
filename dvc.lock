@@ -124,17 +124,16 @@ stages:
       size: 43828971
       nfiles: 231
   compile_results:
-    cmd: C:\Python37\python.exe compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db
-      --output_db sqlite:///../../processed_output/compiled_gcbm_output.db >> ..\..\logs\compile_results.log
+    cmd: compileGCBMResults.bat
     deps:
     - path: ..\..\gcbm_project\output\gcbm_output.db
-      md5: 87e9c74466d56a0eddc00a23baeba91d
+      md5: 6f345b5f1afc869a3cef818c570e8d9e
       size: 720896
     - path: ..\..\logs\create_tiffs.log
       md5: ec63ab8c2e644a3aa2bebac032b2299b
       size: 15633
     - path: ..\..\processed_output\compiled_gcbm_output.db
-      md5: f07498038e8e5d8a053691220d7bd174
+      md5: a8acd14fb99de0a213dd19cb931bec30
       size: 413696
     - path: compileGCBMResults.bat
       md5: 495d2830357c57c216242c7d1233c266
@@ -143,9 +142,9 @@ stages:
       md5: c1664af923128ae8641b521fc330f439
       size: 17854
     - path: compileresults.py
-      md5: da1f6e4096059269778566aac39d4c72
-      size: 14135
+      md5: 01252e92976612c21c55a6cf6c91c03f
+      size: 14393
     outs:
     - path: ..\..\logs\compile_results.log
-      md5: 33e099b72422816f31b2213af18108dd
+      md5: d1b66d9a696c715601c774347c9f31cb
       size: 1656

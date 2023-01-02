@@ -9,7 +9,8 @@ stages:
     outs:
     - ..\..\logs\tiler_log.txt
   recliner2gcbm_x64:
-    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json >> logs\recliner_log.txt
+    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json
+      >> logs\recliner_log.txt
     wdir: Standalone_GCBM
     deps:
     - logs\tiler_log.txt
@@ -57,14 +58,14 @@ stages:
     - ..\..\logs\create_tiffs.log
     - ..\..\processed_output\spatial
   compile_results:
-    cmd: C:\Python37\python.exe compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db >> ..\..\logs\compile_results.log
-    wdir: Standalone_GCBM\tools\CompileGCBMResults
+    cmd: compileGCBMResults.bat
+    wdir: Standalone_GCBM/tools/CompileGCBMResults
     deps:
-    - ..\..\logs\create_tiffs.log
-    - compileGCBMResults.bat
-    - compileresults.py
     - ..\..\gcbm_project\output\gcbm_output.db
-    - compileresults.json
+    - ..\..\logs\create_tiffs.log
     - ..\..\processed_output\compiled_gcbm_output.db
+    - compileGCBMResults.bat
+    - compileresults.json
+    - compileresults.py
     outs:
     - ..\..\logs\compile_results.log
