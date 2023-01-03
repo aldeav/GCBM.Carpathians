@@ -40,6 +40,13 @@ stages:
     - run_gcbm.bat
     - ..\tools\GCBM\moja.cli.exe
     - gcbm_config.cfg
+    - localdomain.json
+    - pools_cbm.json
+    - modules_cbm.json
+    - modules_output.json
+    - spinup.json
+    - variables.json
+    - internal_variables.json
     - provider_config.json
     - ..\layers\tiled\LifeZone_moja.tiff
     - ..\layers\tiled\mean_annual_temperature_moja.tiff
