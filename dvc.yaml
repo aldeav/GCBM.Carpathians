@@ -1,13 +1,13 @@
 stages:
   tiler:
-    cmd: C:\Python37\python.exe ..\..\tools\Tiler\tiler.py
-    wdir: Standalone_GCBM\layers\tiled
+    cmd: python ../../tools/Tiler/tiler.py
+    wdir: Standalone_GCBM/layers/tiled
     deps:
-    - ..\..\tools\Tiler\tiler.py
-    - ..\raw\environment
-    - ..\raw\inventory
+    - ../../tools/Tiler/tiler.py
+    - ../raw/environment
+    - ../raw/inventory
     outs:
-    - ..\..\logs\tiler_log.txt
+    - ../../logs/tiler_log.txt
   recliner2gcbm_x64:
     cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json >> logs\recliner_log.txt
     wdir: Standalone_GCBM
