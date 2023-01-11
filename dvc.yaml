@@ -67,7 +67,7 @@ stages:
     - ..\..\processed_output\spatial
   compile_results:
     cmd: compileGCBMResults.bat
-    wdir: Standalone_GCBM/tools/CompileGCBMResults
+    wdir: Standalone_GCBM\tools\CompileGCBMResults
     deps:
     - ..\..\gcbm_project\output\gcbm_output.db
     - ..\..\logs\create_tiffs.log
