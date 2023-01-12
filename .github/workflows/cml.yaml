@@ -14,5 +14,4 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cml ci
-          dvc repro -s tiler > report.md
-          cml comment create --publish --pr=false report.md
+          dvc dag
