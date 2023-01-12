@@ -15,6 +15,7 @@ jobs:
           cml ci
           python --version > report.md
           pip install -r requirements.txt
-          cat pip freeze >> report.md
+          pip freeze > versions.txt
+          cat versions.txt >> report.md
 
           cml comment create --publish --pr=false report.md
