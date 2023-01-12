@@ -15,7 +15,6 @@ jobs:
         run: |
           cml ci
           python --version > report.md
-          sudo apt install libgdal-dev
           pip install -r requirements.txt
           rm -r python\lib\site-packages\osgeo\gdalplugins\*.*
           cat pip freeze >> report.md

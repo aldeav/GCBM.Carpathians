@@ -1,7 +1,6 @@
 cycler
 ftfy
 future
-GDAL
 geographiclib
 geopy
 imageio
