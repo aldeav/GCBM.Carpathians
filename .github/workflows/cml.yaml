@@ -9,9 +9,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
+          python-version: '3.7.9'
       - name: Generate metrics report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cml ci
-          dvc dag
+          python --version > report.md
+
+          cml comment create --publish --pr=false report.md
