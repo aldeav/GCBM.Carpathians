@@ -22,7 +22,7 @@ jobs:
           cml ci
           python --version > report.txt
 
-          PATH_PYTHON=$(python -c 'import sys; print(sys.executable)')   
+          PATH_PYTHON=%C:\hostedtoolcache\windows\Python\3.7.9\x64%   
 
           pip install installation/GDAL-2.4.1-cp37-cp37m-win_amd64.whl      
           del /q "${PATH_PYTHON}\lib\site-packages\osgeo\gdalplugins\*.*"
