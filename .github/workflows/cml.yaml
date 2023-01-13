@@ -17,8 +17,8 @@ jobs:
         run: |
           python --version > report.md
 
-          pip install installation\GDAL-3.4.3-cp310-cp310-win_amd64.whl
-          pip install installation\mojadata-3.4.3-py3-none-any.whl
+          # pip install installation\GDAL-3.4.3-cp310-cp310-win_amd64.whl
+          # pip install installation\mojadata-3.4.3-py3-none-any.whl
           pip install -r installation/requirements.txt
           
           pip freeze > result.txt
