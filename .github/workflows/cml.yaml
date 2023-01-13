@@ -5,6 +5,7 @@ jobs:
     runs-on: [windows-latest]
     steps:
       - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
@@ -25,11 +26,21 @@ jobs:
           set PYTHONHOME="C:\hostedtoolcache\windows\Python\3.7.9\x64"
           
           pip install installation/GDAL-2.4.1-cp37-cp37m-win_amd64.whl      
-          del /q "%PYTHONHOME%\lib\site-packages\osgeo\gdalplugins\*.*"
+          # del /q "%PYTHONHOME%\lib\site-packages\osgeo\gdalplugins\*.*"
 
           pip install installation/mojadata-3.4.3-py3-none-any.whl
+          pip install -r requirements.txt
 
           pip freeze > result.txt
 
           type report.txt result.txt > report.md
+          cml send comment report.md
+
+      - name: Run tiler stage
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s tiler > log.txt
+          type log.txt > report.md
           cml send comment report.md
