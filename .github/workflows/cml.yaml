@@ -18,8 +18,10 @@ jobs:
         run: |
           cml ci
           python --version > report.txt
+          
+          pip install installation/GDAL-2.4.1-cp37-cp37m-win_amd64.whl
+          pip install installation/mojadata-3.4.3-py3-none-any.whl
           pip install -r installation/requirements.txt
-          pip install installation/*.whl
 
           pip freeze > result.txt
 
