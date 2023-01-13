@@ -23,5 +23,5 @@ jobs:
 
           pip freeze > result.txt
 
-          cat report.txt result.txt > report.md
+          type report.txt result.txt > report.md
           cml comment create --publish --pr=false report.md
