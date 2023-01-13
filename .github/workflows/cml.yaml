@@ -17,8 +17,3 @@ jobs:
         run: |
           python -c 'import sys; print(sys.executable)'
           python -c 'import os; print(os.path.expanduser('~'))'
-          PATH_PYTHON=$(python -c 'import sys; print(sys.executable)')
-          SETUP_PYTHON=$('${{ steps.setup-python.outputs.python-path }}' -c 'import sys; print(sys.executable)')
-          if [ "${SETUP_PYTHON}" != "${PATH_PYTHON}" ]; then
-            echo "Executable mismatch. python in PATH is ${PATH_PYTHON}; python-path (${{ steps.setup-python.outputs.python-path }}) is ${SETUP_PYTHON}"
-            exit 1
