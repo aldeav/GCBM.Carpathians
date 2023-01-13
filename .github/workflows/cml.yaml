@@ -15,10 +15,8 @@ jobs:
         run: |
           cml ci
           python --version > report.md
-          
+          pip install -r installation/requirements.txt
           pip install installation/*.whl
-          pip freeze > versions.txt
-          cat versions.txt >> report.md
 
           dvc repro -s tiler > result.txt
 
