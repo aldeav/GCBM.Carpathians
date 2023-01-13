@@ -18,6 +18,7 @@ jobs:
       - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
         run: |
           cml ci
           python --version > report.txt
@@ -33,4 +34,3 @@ jobs:
 
           type report.txt result.txt > report.md
           cml comment create --publish --pr=false report.md
-        shell: cmd
