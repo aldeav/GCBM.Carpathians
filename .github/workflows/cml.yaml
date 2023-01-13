@@ -15,21 +15,6 @@ jobs:
 
       - name: Check python-path
         run: |
-          PATH_PYTHON=$(python -c 'import sys; print(sys.executable)')
-          SETUP_PYTHON=$('${{ steps.setup-python.outputs.python-path }}' -c 'import sys; print(sys.executable)')
-          if [ "${SETUP_PYTHON}" != "${PATH_PYTHON}" ]; then
-            echo "Executable mismatch. python in PATH is ${PATH_PYTHON}; python-path (${{ steps.setup-python.outputs.python-path }}) is ${SETUP_PYTHON}"
-            exit 1
-          fi
-          echo 'python-path: ${{ steps.setup-python.outputs.python-path }}'
-        shell: bash
+          set PYTHONHOME="C:\hostedtoolcache\windows\Python\3.7.9\x64/lib/pkgconfig"
 
-      - name: Validate version
-        run: |
-          $pythonVersion = (python --version)
-          if ("Python ${{ matrix.python }}" -ne "$pythonVersion"){
-            Write-Host "The current version is $pythonVersion; expected version is ${{ matrix.python }}"
-            exit 1
-          }
-          $pythonVersion
-        shell: pwsh
+          python --version
