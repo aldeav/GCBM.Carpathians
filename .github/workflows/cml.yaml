@@ -1,4 +1,4 @@
-name: gcbm-Carpathains-CML
+name: gcbm-Carpathians-CML
 on: push
 jobs:
   run:
@@ -13,8 +13,14 @@ jobs:
         with:
           python-version: '3.7.9'
 
-      - name: Check python-path
+      - name: Required Installations
         run: |
-          set PYTHONHOME="C:\hostedtoolcache\windows\Python\3.7.9\x64/lib/pkgconfig"
+          python --version > report.md
 
-          python --version
+          pip install installation/*.whl
+          pip install -r installation/requirements.txt
+          
+          pip freeze > result.txt
+          cat result.txt >> report.md
+
+          cml send comment report.md
