@@ -15,3 +15,21 @@ jobs:
       - name: Check python path
         run: python -c 'import sys; print(sys.executable)'
 
+      - name: Required Installations
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cml ci
+          python --version > report.txt
+
+          PATH_PYTHON=$(python -c 'import sys; print(sys.executable)')   
+
+          pip install installation/GDAL-2.4.1-cp37-cp37m-win_amd64.whl      
+          del /q "${PATH_PYTHON}\lib\site-packages\osgeo\gdalplugins\*.*"
+
+          pip install installation/mojadata-3.4.3-py3-none-any.whl
+
+          pip freeze > result.txt
+
+          type report.txt result.txt > report.md
+          cml comment create --publish --pr=false report.md
