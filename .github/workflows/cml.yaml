@@ -5,26 +5,13 @@ jobs:
     runs-on: [windows-latest]
     steps:
       - uses: iterative/setup-cml@v1
-      - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
       - uses: actions/setup-python@v4
         with:
           python-version: '3.7.9'
-      - name: Check installation
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cml ci
-          python --version > report.txt
-          
-          pip install installation/GDAL-2.4.1-cp37-cp37m-win_amd64.whl
-          del /q "%pythonLocation%\lib\site-packages\osgeo\gdalplugins\*.*"
-          pip install installation/mojadata-3.4.3-py3-none-any.whl
-          pip install -r installation/requirements.txt
 
-          pip freeze > result.txt
+      - name: Check python path
+        run: python -c 'import sys; print(sys.executable)'
 
-          type report.txt result.txt > report.md
-          cml comment create --publish --pr=false report.md
