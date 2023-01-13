@@ -23,10 +23,9 @@ jobs:
           python --version > report.txt
           
           set PYTHONHOME=C:\hostedtoolcache\windows\Python\3.7.9\x64
-          set PATH_PYTHON=%PYTHONHOME%   
-
+          
           pip install installation/GDAL-2.4.1-cp37-cp37m-win_amd64.whl      
-          del /q "${PATH_PYTHON}\lib\site-packages\osgeo\gdalplugins\*.*"
+          del /q "%PYTHONHOME%\lib\site-packages\osgeo\gdalplugins\*.*"
 
           pip install installation/mojadata-3.4.3-py3-none-any.whl
 
