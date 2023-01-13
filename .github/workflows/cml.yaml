@@ -33,3 +33,4 @@ jobs:
 
           type report.txt result.txt > report.md
           cml comment create --publish --pr=false report.md
+        shell: cmd
