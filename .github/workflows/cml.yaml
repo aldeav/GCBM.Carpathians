@@ -14,7 +14,7 @@ jobs:
         run: |
           cml ci
           python --version > report.md
-          pip install -r requirements.txt
+          pip install -r installation/requirements.txt
           pip install installation/mojadata-3.4.3-py3-none-any.whl
           pip freeze > versions.txt
           cat versions.txt >> report.md
