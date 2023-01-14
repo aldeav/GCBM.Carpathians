@@ -14,14 +14,13 @@ jobs:
           python-version: '3.7.9'
 
       - name: Required Installations
+        shell: cmd
         run: |
-          python --version > report.md
-
           pip install installation\GDAL-2.4.1-cp37-cp37m-win_amd64.whl
           pip install installation\mojadata-3.4.3-py3-none-any.whl
           # pip install -r installation/requirements-py37.txt
           
           pip freeze > result.txt
-          cat result.txt >> report.md
+          type result.txt > report.md
 
           cml send comment report.md
