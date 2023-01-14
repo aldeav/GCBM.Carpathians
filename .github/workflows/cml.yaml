@@ -15,11 +15,9 @@ jobs:
       - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
         run: |
           cml ci
           python --version > report.md
-
-          pip freeze > result.txt
-          cat result.txt >> report.md
 
           cml send comment report.md
