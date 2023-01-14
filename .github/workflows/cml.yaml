@@ -31,7 +31,7 @@ jobs:
         shell: cmd
         run: |
           python Standalone_GCBM\tools\Tiler\tiler.py
-          Standalone_GCBM\logs\tiler_log.txt > report.md
+          type Standalone_GCBM\logs\tiler_log.txt > report.md
 
           cml comment create --publish --pr=false report.md
           
