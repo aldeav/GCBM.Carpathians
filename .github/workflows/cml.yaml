@@ -24,6 +24,5 @@ jobs:
           pip install -r installation\requirements-py37.txt
 
           pip freeze > result.txt
-          
-          type result.txt report.txt > report.md
-          cml send comment report.md
+
+          result.txt
