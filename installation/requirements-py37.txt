@@ -1,7 +1,6 @@
 cycler==0.10.0
 ftfy==5.6
 future==0.18.2
-GDAL==2.4.2
 geographiclib==1.50
 geopy==1.20.0
 imageio==2.6.1
