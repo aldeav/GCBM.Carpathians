@@ -13,14 +13,42 @@ jobs:
         with:
           python-version: '3.7.9'
 
-      - name: Intall mojadata through pip
+      - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
         run: |
-          pip install mojadata
+          pip install installation\GDAL-2.4.1-cp37-cp37m-win_amd64.whl
+          del /q "C:\hostedtoolcache\windows\Python\3.7.9\x64\lib\site-packages\osgeo\gdalplugins\*.*"
+          pip install installation\mojadata-3.4.3-py3-none-any.whl
+          pip install -r installation\requirements-py37.txt
 
-          pip freeze > report.md
+          pip freeze > result.txt
+          type result.txt
+
+      - name: dvc repro - tiler 
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s tiler 
+          echo ran tiler stage > report.md
+      
+      - name: dvc repro - recliner2gcbm_x64
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s recliner2gcbm_x64 
+          echo ran recliner2gcbm_x64 stage >> report.md
+        
+      - name: dvc repro - update_gcbm_configuration
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s update_gcbm_configuration 
+          echo ran update_gcbm_configuration stage >> report.md
+
           cml comment create --publish --pr=false report.md
-
           

@@ -1,15 +1,20 @@
+vars:
+  - python_path: python
+  - sim_start_year: '2010'
+  - sim_end_year: '2020'
+
 stages:
   tiler:
-    cmd: python ../../tools/Tiler/tiler.py
-    wdir: Standalone_GCBM/layers/tiled
+    cmd: ${python_path} ..\..\tools\Tiler\tiler.py
+    wdir: Standalone_GCBM\layers\tiled
     deps:
-    - ../../tools/Tiler/tiler.py
-    - ../raw/environment
-    - ../raw/inventory
+    - ..\..\tools\Tiler\tiler.py
+    - ..\raw\environment
+    - ..\raw\inventory
     outs:
-    - ../../logs/tiler_log.txt
+    - ..\..\logs\tiler_log.txt
   recliner2gcbm_x64:
-    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json >> logs\recliner_log.txt
+    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json > logs\recliner_log.txt
     wdir: Standalone_GCBM
     deps:
     - logs\tiler_log.txt
@@ -21,7 +26,7 @@ stages:
     outs:
     - logs\recliner_log.txt
   update_gcbm_configuration:
-    cmd: update_gcbm_configuration.bat
+    cmd: ${python_path} ..\tools\tiler\update_gcbm_config.py --layer_root ..\layers\tiled --template_path templates --output_path . --input_db_path ..\input_database\gcbm_input.db --start_year ${sim_start_year} --end_year ${sim_end_year} --log_path ..\logs
     wdir: Standalone_GCBM\gcbm_project
     deps:
     - ..\logs\recliner_log.txt
