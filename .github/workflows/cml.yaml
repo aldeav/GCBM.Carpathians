@@ -4,8 +4,8 @@ jobs:
   run:
     runs-on: [windows-latest]
     steps:
-      - uses: iterative/setup-cml@v1
-      - uses: iterative/setup-dvc@v1
+      - uses: iterative/setup-cml@v2
+      - uses: iterative/setup-dvc@v2
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
@@ -13,25 +13,14 @@ jobs:
         with:
           python-version: '3.7.9'
 
-      - name: Required Installations
+      - name: Intall mojadata through pip
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
         run: |
-          pip install installation\GDAL-2.4.1-cp37-cp37m-win_amd64.whl
-          pip install installation\mojadata-3.4.3-py3-none-any.whl
-          pip install -r installation\requirements-py37.txt
+          pip install mojadata
 
-          pip freeze > result.txt
-          type result.txt
-
-      - name: dvc repro - tiler stage
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
-        run: |
-          dvc repro -s tiler 
-          echo ran tiler stage > report.md
-
+          pip freeze > report.md
           cml comment create --publish --pr=false report.md
+
           
