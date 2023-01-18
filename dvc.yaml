@@ -36,7 +36,7 @@ stages:
     outs:
     - ..\logs\update_gcbm_config.log
   run_gcbm:
-    cmd: run_gcbm.bat
+    cmd: run_gcbm.bat ${python_path}
     wdir: Standalone_GCBM\gcbm_project
     deps:
     - ..\logs\update_gcbm_config.log
@@ -58,7 +58,7 @@ stages:
     outs:
     - ..\logs\Moja_Debug.log
   create_tiffs:
-    cmd: create_tiffs.bat
+    cmd: create_tiffs.bat ${python_path}
     wdir: Standalone_GCBM\tools\CompileGCBMSpatialOutput
     deps:
     - ..\..\logs\Moja_Debug.log
@@ -69,7 +69,7 @@ stages:
     - ..\..\logs\create_tiffs.log
     - ..\..\processed_output\spatial
   compile_results:
-    cmd: compileGCBMResults.bat
+    cmd: compileGCBMResults.bat ${python_path}
     wdir: Standalone_GCBM\tools\CompileGCBMResults
     deps:
     - ..\..\gcbm_project\output\gcbm_output.db

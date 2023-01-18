@@ -52,5 +52,29 @@ jobs:
           dvc repro -s update_gcbm_configuration 
           echo ran update_gcbm_configuration stage >> report.md
 
+      - name: dvc repro - run_gcbm
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s run_gcbm 
+          echo ran run_gcbm stage >> report.md
+
+      - name: dvc repro - create_tiffs
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s create_tiffs 
+          echo ran create_tiffs stage >> report.md
+
+      - name: dvc repro - compile_results
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s compile_results 
+          echo ran compile_results stage >> report.md
+
           cml comment create --publish --pr=false report.md
           
