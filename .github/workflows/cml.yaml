@@ -18,9 +18,11 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
         run: |
+          installation\AccessDatabaseEngine_x64.exe /passive
+          
           pip install installation\GDAL-2.4.1-cp37-cp37m-win_amd64.whl
           del /q "C:\hostedtoolcache\windows\Python\3.7.9\x64\lib\site-packages\osgeo\gdalplugins\*.*"
-          pip install installation\mojadata-3.4.3-py3-none-any.whl
+          
           pip install -r installation\requirements-py37.txt
 
           pip freeze > result.txt
