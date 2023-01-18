@@ -9,7 +9,7 @@ stages:
     outs:
     - ..\..\logs\tiler_log.txt
   recliner2gcbm_x64:
-    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json >> logs\recliner_log.txt
+    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json > logs\recliner_log.txt
     wdir: Standalone_GCBM
     deps:
     - logs\tiler_log.txt
