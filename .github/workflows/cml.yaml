@@ -43,7 +43,6 @@ jobs:
         run: |
           dvc repro -s recliner2gcbm_x64 
           echo ran recliner2gcbm_x64 stage >> report.md
-          cml comment create --publish --pr=false report.md
         
       - name: dvc repro - update_gcbm_configuration
         env:

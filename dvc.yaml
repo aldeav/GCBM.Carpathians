@@ -1,9 +1,9 @@
 vars:
-  - python_path: python
+  - python_path: C:\hostedtoolcache\windows\Python\3.7.9\x64
 
 stages:
   tiler:
-    cmd: ${python_path} ..\..\tools\Tiler\tiler.py
+    cmd: ${python_path}\python.exe ..\..\tools\Tiler\tiler.py
     wdir: Standalone_GCBM\layers\tiled
     deps:
     - ..\..\tools\Tiler\tiler.py
@@ -24,7 +24,7 @@ stages:
     outs:
     - logs\recliner_log.txt
   update_gcbm_configuration:
-    cmd: ${python_path} ..\tools\tiler\update_gcbm_config.py --layer_root layers\tiled --template_path gcbm_project\templates --output_path gcbm_project --input_db_path input_database\gcbm_input.db --start_year 2010 --end_year 2020 --log_path logs
+    cmd: update_gcbm_configuration.bat ${python_path}
     wdir: Standalone_GCBM\gcbm_project
     deps:
     - ..\logs\recliner_log.txt
