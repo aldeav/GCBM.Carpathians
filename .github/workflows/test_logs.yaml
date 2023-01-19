@@ -29,8 +29,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
-        run: |
-          dvc pull Standalone_GCBM\logs\Moja_Debug.log 
+        run: | 
           dvc repro -s create_tiffs 
 
           type Standalone_GCBM\logs\create_tiffs.log
