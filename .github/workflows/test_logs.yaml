@@ -25,47 +25,15 @@ jobs:
           
           pip install -r installation\requirements-py37.txt
 
-          pip freeze > result.txt
-          type result.txt
-
-      - name: dvc repro - tiler 
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
-        run: |
-          dvc repro -s tiler 
-          echo ran tiler stage > report.md
-      
-      - name: dvc repro - recliner2gcbm_x64
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
-        run: |
-          dvc repro -s recliner2gcbm_x64 
-          echo ran recliner2gcbm_x64 stage >> report.md
-        
-      - name: dvc repro - update_gcbm_configuration
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
-        run: |
-          dvc repro -s update_gcbm_configuration 
-          echo ran update_gcbm_configuration stage >> report.md
-
-      - name: dvc repro - run_gcbm
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
-        run: |
-          dvc repro -s run_gcbm 
-          echo ran run_gcbm stage >> report.md
-
       - name: dvc repro - create_tiffs
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
         run: |
+          dvc pull Standalone_GCBM\logs\Moja_Debug.log 
           dvc repro -s create_tiffs 
+
+          type Standalone_GCBM\logs\create_tiffs.log
           echo ran create_tiffs stage >> report.md
 
       - name: dvc repro - compile_results
@@ -74,6 +42,8 @@ jobs:
         shell: cmd
         run: |
           dvc repro -s compile_results 
+
+          Standalone_GCBM\logs\compile_results.log
           echo ran compile_results stage >> report.md
 
           cml comment create --publish --pr=false report.md
