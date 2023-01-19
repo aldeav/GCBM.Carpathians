@@ -1,0 +1,92 @@
+name: gcbm-Carpathians-CML
+on: push
+jobs:
+  run:
+    runs-on: [windows-latest]
+    steps:
+      - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-dvc@v1
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.9'
+
+      - name: Required Installations
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          installation\AccessDatabaseEngine_x64.exe /passive
+
+          pip install installation\GDAL-2.4.1-cp37-cp37m-win_amd64.whl
+          del /q "C:\hostedtoolcache\windows\Python\3.7.9\x64\lib\site-packages\osgeo\gdalplugins\*.*"
+          
+          pip install -r installation\requirements-py37.txt
+
+          pip freeze > result.txt
+          type result.txt
+
+      - name: dvc repro - tiler 
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s tiler 
+          echo ran tiler stage > report.md
+
+          type Standalone_GCBM\logs\tiler_log.txt
+      
+      - name: dvc repro - recliner2gcbm_x64
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s recliner2gcbm_x64 
+          echo ran recliner2gcbm_x64 stage >> report.md
+
+          type Standalone_GCBM\logs\recliner_log.txt
+        
+      - name: dvc repro - update_gcbm_configuration
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s update_gcbm_configuration 
+          echo ran update_gcbm_configuration stage >> report.md
+
+          type Standalone_GCBM\logs\update_gcbm_config.log
+
+      - name: dvc repro - run_gcbm
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s run_gcbm 
+          echo ran run_gcbm stage >> report.md
+
+          type Standalone_GCBM\logs\Moja_Debug.log
+
+      - name: dvc repro - create_tiffs
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s create_tiffs 
+          echo ran create_tiffs stage >> report.md
+
+          type Standalone_GCBM\logs\create_tiffs.log
+
+      - name: dvc repro - compile_results
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          dvc repro -s compile_results 
+          echo ran compile_results stage >> report.md
+
+          type Standalone_GCBM\logs\compile_results.log
+
+          cml comment create --publish --pr=false report.md
+          
