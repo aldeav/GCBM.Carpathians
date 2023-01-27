@@ -10,10 +10,6 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.1.3'
-
-      - name: Get wd
-        run: | 
-          Rscript -e "getwd()"
       
       - name: Set wd to postprocessing
         env:
@@ -22,13 +18,14 @@ jobs:
           cd Postprocessing
           Rscript -e "getwd()"
 
-      - uses: r-lib/actions/setup-renv@v2
       - name: Renv and run postprocessing code
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          Rscript -e 'renv::activate(project = 'Postprocessing')'
-          Rscript -e 'renv::restore(lockfile = 'Postprocessing/lockfile')'
+          Rscript -e "getwd()"
+
+          Rscript -e "renv::activate(project = 'Postprocessing')"
+          Rscript -e "renv::restore(lockfile = 'Postprocessing/renv.lock')"
 
           Rscript Postprocessing/Summarize_DOM_Stocks.R
         
