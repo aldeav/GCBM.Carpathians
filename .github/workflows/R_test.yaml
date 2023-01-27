@@ -18,8 +18,8 @@ jobs:
           cd Postprocessing
           Rscript -e "getwd()"
 
-          Rscript -e "renv::activate(project = 'Postprocessing')"
-          Rscript -e "renv::restore(lockfile = 'Postprocessing/renv.lock')"
+          Rscript -e "renv::activate()"
+          Rscript -e "renv::restore(lockfile = 'renv.lock')"
 
           Rscript Summarize_DOM_Stocks.R
         
