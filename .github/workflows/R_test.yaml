@@ -15,9 +15,31 @@ jobs:
         run: | 
           Rscript -e "getwd()"
       
-      - name: renv status and run postprocessing code
+      - name: Set wd to postprocessing
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          Rscript -e "setwd('Postprocessing')"
+          cd Postprocessing
           Rscript -e "getwd()"
+
+      - uses: r-lib/actions/setup-renv@v2
+      - name: Renv and run postprocessing code
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: | 
+          Rscript -e 'renv::activate()'
+          Rscript -e 'renv::restore()'
+
+          Rscript Postprocessing/Summarize_DOM_Stocks.R
+        
+      - name: Display plots for DOM stocks
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "## Figures created" > report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_BorealWet.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateMoist.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateWet.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_PolarRainTundra.png --md >> report.md
+          cml comment create --publish --pr=false report.md
