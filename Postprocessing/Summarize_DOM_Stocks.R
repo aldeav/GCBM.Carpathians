@@ -63,7 +63,10 @@ for (run in runs) {
   # Divide the DOM values per area to obtain ton/ha values
   pools_run_area <- left_join(pools_run,areas_run,by = c("year","LifeZone"))
   pools_run_area <- mutate(pools_run_area, pool_tc_per_ha = pool_tc_sum/area_sum)
-  pools_run_area$run <- names_runs
+  pools_run_area$run <- run
+  
+  # Recode the runs 
+  pools_run_area$run <- as.character(recode(pools_run_area$run, !!!names_runs))
   
   
   # Make a compiled database
@@ -108,7 +111,7 @@ for (ag in unique(pools_summary$Age)) {
 
 p <- ggplot(filter(pools_full, LifeZone=="Boreal wet forest"), aes(x = year, y = pool_tc_per_ha, fill = indicator))+
   geom_area() +
-  facet_grid(indicator~run,labeller = label_wrap_gen(width = 7)) +
+  facet_grid(indicator~run,labeller=label_wrap_gen(width=7)) +
   ylab("Carbon Stock (ton C / ha)") +
   scale_fill_manual(values = c("darkgoldenrod4","chartreuse3","gray14","forestgreen")) +
   ggtitle("Carbon Stocks of Boreal wet forest (Carpathians) - GCBM Sensitivity analysis") +
@@ -117,7 +120,7 @@ p <- ggplot(filter(pools_full, LifeZone=="Boreal wet forest"), aes(x = year, y =
 
 p
 
-ggsave(filename=("Figures/Carpathians_Sensitivity_BorealWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
+ggsave(file=paste0("Figures/Carpathians_Sensitivity_BorealWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
 
 
 # Cool temperate moist forest
