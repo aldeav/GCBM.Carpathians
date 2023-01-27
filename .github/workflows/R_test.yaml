@@ -13,19 +13,6 @@ jobs:
       - name: Restore renv
         run: | 
           Rscript -e 'renv::restore()'
+          Rscript -e 'getwd()'
       
-      - name: Run postprocessing code
-        run: | 
-          Rscript Postprocessing/Summarize_DOM_Stocks.r
 
-      - name: Show plots for DOM stocks
-        run: |
-          echo "## Figures created" > report.md
-
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_BorealWet.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateMoist.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateWet.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_PolarRainTundra.png --md >> report.md
-
-          cml comment create --publish --pr=false report.md
