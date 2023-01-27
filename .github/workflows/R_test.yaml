@@ -12,7 +12,7 @@ jobs:
           version: '4.1.3'
       - uses: r-lib/actions/setup-renv@v2
         with:
-          profile: 'source("Postprocessing/renv/activate.R")''
+          profile: 'source("Postprocessing/renv/activate.R")'
 
       - name: Restore renv and status
         run: | 
