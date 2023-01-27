@@ -12,5 +12,4 @@ jobs:
         run: | 
           R --version 
 
-          sudo -i R
-          install.packages("renv")
+          R CMD INSTALL --help
