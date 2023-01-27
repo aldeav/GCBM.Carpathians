@@ -120,7 +120,7 @@ p <- ggplot(filter(pools_full, LifeZone=="Boreal wet forest"), aes(x = year, y =
 
 p
 
-ggsave(filename=("Figures/Carpathians_Sensitivity_BorealWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
+ggsave(filename=("./Figures/Carpathians_Sensitivity_BorealWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
 
 
 # Cool temperate moist forest
@@ -135,7 +135,7 @@ p <- ggplot(filter(pools_full,LifeZone=="Cool temperate moist forest"),aes(x = y
 
 p
 
-ggsave(filename=("Figures/Carpathians_Sensitivity_CoolTemperateMoist.png"), width = 300, height = 180, units = "mm", dpi = 300)
+ggsave(filename=("./Figures/Carpathians_Sensitivity_CoolTemperateMoist.png"), width = 300, height = 180, units = "mm", dpi = 300)
 
 
 # Cool temperate steppe
@@ -150,7 +150,7 @@ p <- ggplot(filter(pools_full,LifeZone=="Cool temperate steppe"), aes(x = year,y
 
 p
 
-ggsave(filename=("Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png"), width = 300, height = 180, units = "mm", dpi = 300)
+ggsave(filename=("./Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png"), width = 300, height = 180, units = "mm", dpi = 300)
 
 
 # Cool temperate wet forest
@@ -165,7 +165,7 @@ p <- ggplot(filter(pools_full,LifeZone=="Cool temperate wet forest"),aes(x = yea
 
 p
 
-ggsave(filename=("Figures/Carpathians_Sensitivity_CoolTemperateWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
+ggsave(filename=("./Figures/Carpathians_Sensitivity_CoolTemperateWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
 
 
 # Polar rain tundra
@@ -180,6 +180,6 @@ p <- ggplot(filter(pools_full,LifeZone=="Polar rain tundra"),aes(x = year, y = p
 
 p
 
-ggsave(filename=("Figures/Carpathians_Sensitivity_PolarRainTundra.png"), width = 300, height = 180, units = "mm", dpi = 300)
+ggsave(filename=("./Figures/Carpathians_Sensitivity_PolarRainTundra.png"), width = 300, height = 180, units = "mm", dpi = 300)
 
 
