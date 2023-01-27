@@ -23,7 +23,6 @@ jobs:
           Rscript -e 'setwd("D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing")''
           Rscript -e 'renv::activate(project = "D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing")'
           Rscript -e 'renv::restore(lockfile = "D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing/renv.lock")'
-          Rscript -e 'renv::status()'
 
           Rscript Postprocessing/Summarize_DOM_Stocks.R
 
