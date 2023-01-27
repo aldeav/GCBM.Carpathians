@@ -2,7 +2,7 @@ name: test-R-CML
 on: push
 jobs:
   run:
-    runs-on: [ubuntu-latest]
+    runs-on: [windows-latest]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -13,28 +13,11 @@ jobs:
 
       - name: Get wd
         run: | 
-          Rscript -e 'getwd()'
+          Rscript -e "getwd()"
       
-      - uses: r-lib/actions/setup-renv@v2
       - name: renv status and run postprocessing code
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          Rscript -e "renv::activate(project = 'Postprocessing')"
-          Rscript -e "renv::restore(lockfile = 'Postprocessing/renv.lock')"
-
-          Rscript Postprocessing/Summarize_DOM_Stocks.R
-
-      - name: Show plots for DOM stocks
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "## Figures created" > report.md
-
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_BorealWet.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateMoist.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateWet.png --md >> report.md
-          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_PolarRainTundra.png --md >> report.md
-
-          cml comment create --publish --pr=false report.md
+          Rscript -e "setwd('Postprocessing')"
+          Rscript -e "getwd()"
