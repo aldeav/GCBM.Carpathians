@@ -20,11 +20,11 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          Rscript -e 'setwd("D:\\a\\GCBM.Carpathians\\GCBM.Carpathians\\Postprocessing")'
-          Rscript -e 'renv::activate(project = "D:\\a\\GCBM.Carpathians\\GCBM.Carpathians\\Postprocessing")'
-          Rscript -e 'renv::restore(lockfile = "D:\\a\\GCBM.Carpathians\\GCBM.Carpathians\\Postprocessing\\renv.lock")'
+          Rscript -e 'setwd("GCBM.Carpathians/GCBM.Carpathians/Postprocessing")'
+          Rscript -e 'renv::activate(project = "GCBM.Carpathians/GCBM.Carpathians/Postprocessing")'
+          Rscript -e 'renv::restore(lockfile = "GCBM.Carpathians/GCBM.Carpathians/Postprocessing/renv.lock")'
 
-          Rscript Postprocessing\Summarize_DOM_Stocks.R
+          Rscript Postprocessing/Summarize_DOM_Stocks.R
 
       - name: Show plots for DOM stocks
         env:
@@ -32,10 +32,10 @@ jobs:
         run: |
           echo "## Figures created" > report.md
 
-          cml_publish Postprocessing\Figures\Carpathians_Sensitivity_BorealWet.png --md >> report.md
-          cml_publish Postprocessing\Figures\Carpathians_Sensitivity_CoolTemperateMoist.png --md >> report.md
-          cml_publish Postprocessing\Figures\Carpathians_Sensitivity_CoolTemperateSteppe.png --md >> report.md
-          cml_publish Postprocessing\Figures\Carpathians_Sensitivity_CoolTemperateWet.png --md >> report.md
-          cml_publish Postprocessing\Figures\Carpathians_Sensitivity_PolarRainTundra.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_BorealWet.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateMoist.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateWet.png --md >> report.md
+          cml_publish Postprocessing/Figures/Carpathians_Sensitivity_PolarRainTundra.png --md >> report.md
 
           cml comment create --publish --pr=false report.md
