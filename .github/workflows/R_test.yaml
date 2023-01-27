@@ -18,7 +18,7 @@ jobs:
       
       - name: Run postprocessing code
         run: | 
-          Rscript Summarize_DOM_Stocks.r
+          Rscript Summarize_DOM_Stocks.R
 
       - name: Show plots for DOM stocks
         run: |
