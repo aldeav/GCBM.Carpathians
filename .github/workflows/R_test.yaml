@@ -21,7 +21,7 @@ jobs:
           Rscript -e "renv::activate(project = 'Postprocessing')"
           Rscript -e "renv::restore(lockfile = 'Postprocessing/renv.lock')"
 
-          Rscript Postprocessing/Summarize_DOM_Stocks.R
+          Rscript Summarize_DOM_Stocks.R
         
       - name: Display plots for DOM stocks
         env:
