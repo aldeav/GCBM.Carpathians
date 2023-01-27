@@ -20,7 +20,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          Rscript -e 'setwd("D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing")''
+          Rscript -e 'setwd("D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing")'
           Rscript -e 'renv::activate(project = "D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing")'
           Rscript -e 'renv::restore(lockfile = "D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing/renv.lock")'
 
