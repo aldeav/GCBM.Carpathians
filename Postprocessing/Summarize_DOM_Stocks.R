@@ -120,7 +120,7 @@ p <- ggplot(filter(pools_full, LifeZone=="Boreal wet forest"), aes(x = year, y =
 
 p
 
-ggsave(file=paste0("Figures/Carpathians_Sensitivity_BorealWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
+ggsave(filename=("Figures/Carpathians_Sensitivity_BorealWet.png"), width = 300, height = 180, units = "mm", dpi = 300)
 
 
 # Cool temperate moist forest
