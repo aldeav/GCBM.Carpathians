@@ -16,13 +16,12 @@ jobs:
           Rscript -e 'getwd()'
       
       - uses: r-lib/actions/setup-renv@v2
-        with:
-          profile: 'source("renv/activate.R")'
       - name: renv status and run postprocessing code
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          Rscript -e 'renv::activate()'
+          Rscript -e 'setwd("D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing")''
+          Rscript -e 'renv::activate(project="D:/a/GCBM.Carpathians/GCBM.Carpathians/Postprocessing")'
           Rscript -e 'renv::restore()'
           Rscript -e 'renv::status()'
 
