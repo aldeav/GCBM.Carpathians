@@ -20,9 +20,8 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          Rscript -e 'setwd("Postprocessing")'
-          Rscript -e 'renv::activate(project = "Postprocessing")'
-          Rscript -e 'renv::restore(lockfile = "Postprocessing\renv.lock")'
+          Rscript -e 'renv::activate(project = "~/Postprocessing")'
+          Rscript -e 'renv::restore(lockfile = "~/Postprocessing/renv.lock")'
 
           Rscript Postprocessing/Summarize_DOM_Stocks.R
 
