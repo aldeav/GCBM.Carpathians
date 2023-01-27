@@ -16,7 +16,7 @@ jobs:
       
       - name: Run postprocessing code
         run: | 
-          R CMD BATCH Postprocessing/Summarize_DOM_Stocks.r
+          Rscript Postprocessing/Summarize_DOM_Stocks.r
 
       - name: Show plots for DOM stocks
         run: |
