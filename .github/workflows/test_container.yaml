@@ -9,6 +9,13 @@ jobs:
         - "8080:8080"
     steps:
       - uses: iterative/setup-dvc@v1
+      - uses: actions/checkout@v3
+
+      - name: Check current directory
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pwd
         
       - name: Initial run of dvc repro - run gcbm 
         env:
