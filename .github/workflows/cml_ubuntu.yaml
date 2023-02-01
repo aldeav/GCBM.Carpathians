@@ -7,15 +7,13 @@ jobs:
       - uses: iterative/setup-cml@v1
       - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.7.15' 
+
 
       - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip install -r installation/requirements-py37.txt
+          pip install -r installation/requirements.txt
 
           sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
           sudo apt-get update
