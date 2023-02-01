@@ -3,6 +3,10 @@ on: push
 jobs:
   run:
     runs-on: [ubuntu-latest]
+    container: 
+      image: ghcr.io/moja-global/rest_api_gcbm:master
+      ports:
+        - "8080:8080"
     steps:
       - uses: iterative/setup-cml@v1
       - uses: iterative/setup-dvc@v1
@@ -15,23 +19,14 @@ jobs:
           cml ci
           pip install -r installation/requirements.txt
 
-          sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update            
-          sudo apt-get install gdal-bin           
-          sudo apt-get install libgdal-dev            
-          export CPLUS_INCLUDE_PATH=/usr/include/gdal            
-          export C_INCLUDE_PATH=/usr/include/gdal           
-          pip install wheel                     
-          sudo pip3 install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}') --global-option=build_ext --global-option="-I/usr/include/gdal"
-
           pip freeze > result.txt
           cat result.txt
-
+          
       - name: dvc repro - run_gcbm
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd Standalone_GCBM/gcbm_project
-          ../tools/GCBM/moja.cli.exe --config_file gcbm_config.cfg --config_provider provider_config.json
+          dvc repro -s run_gcbm 
           echo "1. Ran run_gcbm stage" > report.md
 
           cat Standalone_GCBM/logs/Moja_Debug.log
@@ -40,8 +35,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd ../tools/CompileGCBMResults
-          python compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
+          dvc repro -s compile_results 
           echo "2. Ran compile_results stage" >> report.md
 
           cat Standalone_GCBM/logs/compile_results.log
@@ -50,7 +44,6 @@ jobs:
         with:
           r-version: '4.1.3'
       - uses: r-lib/actions/setup-renv@v2
-      - uses: actions/checkout@v3
       
       - name: Renv and run postprocessing code
         env:
