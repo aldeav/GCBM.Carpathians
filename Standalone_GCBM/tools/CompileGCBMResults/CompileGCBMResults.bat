@@ -2,7 +2,7 @@
 
 REM *************************** USER CONFIGURATION ***************************
 REM Set Python path - change this to where Python is installed on your machine.
-if "%~1" == "" (set GCBM_PYTHON=C:\Python37) else (set GCBM_PYTHON=%~1)
+set GCBM_PYTHON=C:\Python37
 REM **************************************************************************
 
 set PYTHONPATH=%GCBM_PYTHON%

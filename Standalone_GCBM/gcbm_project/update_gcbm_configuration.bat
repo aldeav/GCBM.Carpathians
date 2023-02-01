@@ -6,7 +6,7 @@ set SIMULATION_START_YEAR=2010
 set SIMULATION_END_YEAR=2020
 
 REM Set Python path - change this to your Python installation directory.
-if "%~1" == "" (set GCBM_PYTHON=C:\Python37) else (set GCBM_PYTHON=%~1)
+set GCBM_PYTHON=C:\Python37
 REM **************************************************************************
 
 REM Set GDAL library paths.

@@ -1,0 +1,19 @@
+name: test-R-CML
+on: push
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: 
+      image: ghcr.io/moja-global/rest_api_gcbm:master
+      ports:
+        - "8080:8080"
+    steps:
+      - uses: iterative/setup-cml@v1
+      - uses: actions/checkout@v3
+      - uses: iterative/setup-dvc@v1
+        
+      - name: Initial run of dvc repro - run gcbm 
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dvc repro -s run_gcbm
