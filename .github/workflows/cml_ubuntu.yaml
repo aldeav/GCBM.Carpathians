@@ -25,6 +25,12 @@ jobs:
           python3 compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
 
           echo "### 2. Compile Results" >> report.md
+
+      - uses: actions/checkout@v3
+      - uses: actions/upload-artifact@v3
+        with:
+          name: compile_gcbm_database
+          path: Standalone_GCBM/processed_output/compiled_gcbm_output.db
   
   run-on-vmhost:
     runs-on: [ubuntu-latest]
@@ -36,6 +42,10 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
       - uses: iterative/setup-cml@v1
       - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: compile_gcbm_database
+          path: Standalone_GCBM/processed_output/
 
       - name: Check current directory
         env:
