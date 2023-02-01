@@ -7,17 +7,20 @@ jobs:
       - uses: iterative/setup-cml@v1
       - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.15' 
 
       - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip install -r installation/requirements.txt
+          pip install -r installation/requirements-py37.txt
 
-          add-apt-repository ppa:ubuntugis/ppa && apt-get update
-          apt-get update
-          apt-get install gdal-bin
-          apt-get install libgdal-dev
+          sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+          sudo apt-get update
+          sudo apt-get install gdal-bin
+          sudo apt-get install libgdal-dev
           export CPLUS_INCLUDE_PATH=/usr/include/gdal
           export C_INCLUDE_PATH=/usr/include/gdal
           pip install GDAL
@@ -25,12 +28,12 @@ jobs:
           pip freeze > result.txt
           cat result.txt
           
-      - name: dvc repro - run_gcbm
+      - name: dvc repro - tiler
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          dvc repro -s run_gcbm 
-          echo "1. Ran run_gcbm stage" > report.md
+          dvc repro -s tiler 
+          echo "1. Ran tiler stage" > report.md
 
           cat Standalone_GCBM/logs/Moja_Debug.log
 
