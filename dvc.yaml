@@ -5,7 +5,7 @@ vars:
 
 stages:
   tiler:
-    cmd: ${python_path} ../../tools/Tiler/tiler.py
+    cmd: python ../../tools/Tiler/tiler.py
     wdir: Standalone_GCBM/layers/tiled
     deps:
     - ../../tools/Tiler/tiler.py
