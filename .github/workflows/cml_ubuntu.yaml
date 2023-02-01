@@ -8,7 +8,6 @@ jobs:
       ports:
         - "8080:8080"
     steps:
-      - uses: iterative/setup-cml@v1
       - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
 
