@@ -12,15 +12,15 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sudo pip3 install -r installation/requirements.txt
+          pip install -r installation/requirements.txt
 
-          sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update            
-          sudo apt-get install gdal-bin           
-          sudo apt-get install libgdal-dev            
-          export CPLUS_INCLUDE_PATH=/usr/include/gdal            
-          export C_INCLUDE_PATH=/usr/include/gdal           
-          pip install wheel                     
-          sudo pip3 install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}') --global-option=build_ext --global-option="-I/usr/include/gdal"
+          sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+          sudo apt-get update
+          sudo apt-get install gdal-bin
+          sudo apt-get install libgdal-dev
+          export CPLUS_INCLUDE_PATH=/usr/include/gdal
+          export C_INCLUDE_PATH=/usr/include/gdal
+          pip install GDAL
 
           pip freeze > result.txt
           cat result.txt
