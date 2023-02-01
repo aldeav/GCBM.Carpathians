@@ -11,10 +11,17 @@ jobs:
       - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
         run: |
           cml ci
           pip install -r installation/requirements.txt
+
+          sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update            
+          sudo apt-get install gdal-bin           
+          sudo apt-get install libgdal-dev            
+          export CPLUS_INCLUDE_PATH=/usr/include/gdal            
+          export C_INCLUDE_PATH=/usr/include/gdal           
+          pip install wheel                     
+          sudo pip3 install GDAL==$(gdal-config --version | awk -F'[.]' '{print $1"."$2}') --global-option=build_ext --global-option="-I/usr/include/gdal"
 
           pip freeze > result.txt
           cat result.txt
@@ -22,7 +29,6 @@ jobs:
       - name: dvc repro - run_gcbm
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
         run: |
           dvc repro -s run_gcbm 
           echo "1. Ran run_gcbm stage" > report.md
@@ -32,7 +38,6 @@ jobs:
       - name: dvc repro - compile_results
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
         run: |
           dvc repro -s compile_results 
           echo "2. Ran compile_results stage" >> report.md
