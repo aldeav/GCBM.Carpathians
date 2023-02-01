@@ -15,7 +15,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pwd
-        
+          
       - name: Compile Results
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,12 +35,18 @@ jobs:
           r-version: '4.1.3'
       - uses: r-lib/actions/setup-renv@v2
       - uses: iterative/setup-cml@v1
+
+      - name: Check current directory
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pwd
       
       - name: Renv and run postprocessing code
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          cd Postprocessing
+          cd ../../Postprocessing
           Rscript -e "getwd()"
 
           Rscript -e "renv::activate()"
