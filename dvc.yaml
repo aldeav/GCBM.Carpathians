@@ -38,7 +38,7 @@ stages:
     outs:
     - ../logs/update_gcbm_config.log
   run_gcbm:
-    cmd: ../tools/GCBM/moja.cli.exe --config_file gcbm_config.cfg --config_provider provider_config.json
+    cmd: chmod +x ../tools/GCBM/moja.cli.exe --config_file gcbm_config.cfg --config_provider provider_config.json
     wdir: Standalone_GCBM/gcbm_project
     deps:
     - ../logs/update_gcbm_config.log
