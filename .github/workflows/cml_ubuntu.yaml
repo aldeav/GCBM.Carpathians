@@ -24,6 +24,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          chmod +x Standalone_GCBM\tools\GCBM\moja.cli.exe
           dvc repro -s run_gcbm 
           echo "1. Ran run_gcbm stage" > report.md
 
