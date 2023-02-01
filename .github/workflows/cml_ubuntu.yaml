@@ -13,6 +13,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
         run: |
+          cml ci
           pip install -r installation/requirements.txt
 
           sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update            
