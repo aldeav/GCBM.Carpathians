@@ -21,4 +21,4 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          dvc repro -s run_gcbm
+          chmod +x dvc repro -s run_gcbm
