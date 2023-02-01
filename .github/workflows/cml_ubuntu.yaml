@@ -46,7 +46,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
-          cd ../../Postprocessing
+          cd ../../../Postprocessing
           Rscript -e "getwd()"
 
           Rscript -e "renv::activate()"
