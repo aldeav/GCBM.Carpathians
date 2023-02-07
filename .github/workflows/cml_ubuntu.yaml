@@ -74,7 +74,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "## Figures created" >> report.md
+          echo "## Figures created" > report.md
           echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_BorealWet.png)" >> report.md 
           echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateMoist.png)" >> report.md
           echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png)" >> report.md
