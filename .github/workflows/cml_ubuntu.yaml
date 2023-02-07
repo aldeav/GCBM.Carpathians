@@ -63,22 +63,13 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
           cd Postprocessing
-          Rscript -e "getwd()"
-
           Rscript -e "renv::activate()"
           Rscript -e "renv::restore(lockfile = 'renv.lock')"
 
           Rscript Summarize_DOM_Stocks.R
-        
-      - name: Display plots for DOM stocks
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "## Figures created" > report.md
-          echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_BorealWet.png)" >> report.md 
-          echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateMoist.png)" >> report.md
-          echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png)" >> report.md
-          echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_CoolTemperateWet.png)" >> report.md
-          echo "![](/Postprocessing/Figures/Carpathians_Sensitivity_PolarRainTundra.png)" >> report.md
-          cml comment create --pr=false report.md
+
+      - name: Display files in Postprocessing
+        run: ls -R
+        working-directory: Postprocessing
+
           
