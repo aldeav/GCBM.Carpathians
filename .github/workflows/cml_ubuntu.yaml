@@ -24,12 +24,17 @@ jobs:
 
           python3 compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
 
-          echo "### 2. Compile Results" >> report.md
+          pwd
 
-      - uses: actions/checkout@v3
+      - name: Check current directory
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pwd
+      
       - uses: actions/upload-artifact@v3
         with:
-          name: compile_gcbm_database
+          name: compiled-gcbm-output
           path: Standalone_GCBM/processed_output/compiled_gcbm_output.db
   
   run-on-vmhost:
