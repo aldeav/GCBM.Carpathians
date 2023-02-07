@@ -68,8 +68,21 @@ jobs:
 
           Rscript Summarize_DOM_Stocks.R
 
-      - name: Display files in Postprocessing
-        run: ls -R
+      - name: Display wd
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pwd
+        
+      - name: Display plots for DOM stocks
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "## Figures created" > report.md
+          echo "![](Figures/Carpathians_Sensitivity_BorealWet.png)" >> report.md 
+          echo "![](Figures/Carpathians_Sensitivity_CoolTemperateMoist.png)" >> report.md
+          echo "![](Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png)" >> report.md
+          echo "![](Figures/Carpathians_Sensitivity_CoolTemperateWet.png)" >> report.md
+          echo "![](Figures/Carpathians_Sensitivity_PolarRainTundra.png)" >> report.md
+          cml comment create --pr=false report.md
         working-directory: Postprocessing
-
           
