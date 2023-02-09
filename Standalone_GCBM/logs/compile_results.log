@@ -1,0 +1,35 @@
+01/02 20:25:05 Compiling results tables...
+01/02 20:25:05   00_setup
+01/02 20:25:05   01_reporting_table_ddl
+01/02 20:25:06   02_create_location_area_view
+01/02 20:25:06   03_populate_change_type_categories
+01/02 20:25:06   04_populate_pool_collections
+01/02 20:25:06   05_populate_pool_collection_pools
+01/02 20:25:06   06_populate_flux_indicators
+01/02 20:25:06   07_create_flux_indicator_view
+01/02 20:25:06   08_populate_flux_indicator_collections
+01/02 20:25:06   09_populate_flux_indicator_collection_flux_indicators
+01/02 20:25:06   10_populate_stock_changes
+01/02 20:25:06   11_create_flux_indicator_aggregates_view
+01/02 20:25:06   12_create_stock_change_indicators_view
+01/02 20:25:06   13_populate_pool_indicators
+01/02 20:25:06   14_create_pool_indicators_view
+01/02 20:25:06   15_create_dist_indicators_view
+01/02 20:25:06   16_create_age_indicators_view
+01/02 20:25:06   17_create_error_indicators_view
+01/02 20:25:06   18_create_total_disturbed_areas_view
+01/02 20:25:06   20_create_disturbance_fluxes_view
+01/02 20:25:06   19_create_density_views
+01/02 20:25:06 Copying reporting tables to output database...
+01/02 20:25:06   v_age_indicators
+01/02 20:25:06   v_disturbance_fluxes
+01/02 20:25:06   v_disturbance_indicators
+01/02 20:25:06   v_error_indicators
+01/02 20:25:06   v_flux_indicator_aggregates
+01/02 20:25:06   v_flux_indicator_aggregates_density
+01/02 20:25:06   v_flux_indicators
+01/02 20:25:06   v_flux_indicators_density
+01/02 20:25:06   v_pool_indicators
+01/02 20:25:06   v_stock_change_indicators
+01/02 20:25:06   v_stock_change_indicators_density
+01/02 20:25:06   v_total_disturbed_areas
