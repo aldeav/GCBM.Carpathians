@@ -1,5 +1,6 @@
 vars:
   - python_path: python
+  - R_path: "C:\\Program Files\\R\\R-4.1.3\\bin\\Rscript.exe"
   - sim_start_year: '2010'
   - sim_end_year: '2020'
 
@@ -82,3 +83,22 @@ stages:
     - compileresults.py
     outs:
     - ../../logs/compile_results.log
+  postprocessing:
+    cmd: Rscript Summarize_DOM_Stocks.R
+    wdir: Postprocessing
+    deps:
+    - ../Standalone_GCBM/processed_output/compiled_gcbm_output.db
+    - ../Standalone_GCBM/logs/compile_results.log
+    - Summarize_DOM_Stocks.R
+    - Tables
+    plots:
+        - Figures/Carpathians_Sensitivity_BorealWet.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_CoolTemperateMoist.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_CoolTemperateWet.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_PolarRainTundra.png:
+            cache: false

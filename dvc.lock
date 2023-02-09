@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   tiler:
-    cmd: C:\Python37\python.exe ..\..\tools\Tiler\tiler.py
+    cmd: C:\python37\python.exe ..\..\tools\Tiler\tiler.py
     deps:
     - path: ..\..\tools\Tiler\tiler.py
       md5: bf45eeb791e49a20914d96c465ffc33a
@@ -16,7 +16,7 @@ stages:
       nfiles: 5
     outs:
     - path: ..\..\logs\tiler_log.txt
-      md5: f282d67922c358749ebb611f57f90b5f
+      md5: e744547b8a677076c38a5a4b13cf9531
       size: 289
   recliner2gcbm_x64:
     cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json
@@ -35,7 +35,7 @@ stages:
       md5: 61351afc14f468a344c475705e6578ff
       size: 6251
     - path: logs\tiler_log.txt
-      md5: f282d67922c358749ebb611f57f90b5f
+      md5: e744547b8a677076c38a5a4b13cf9531
       size: 289
     - path: tools\recliner2gcbm-x64\recliner2gcbm.exe
       md5: a45c702ad1c9aff92edc6493cff99450
@@ -51,12 +51,12 @@ stages:
       md5: 1b814815bf13da736ac194b7adae4545
       size: 1536000
     - path: ..\layers\tiled
-      md5: d4797d7b5b7c940a60572e33b8481549.dir
+      md5: c2a3c7bdd627c4ad5e89116123506361.dir
       size: 73166
       nfiles: 8
     - path: ..\logs\recliner_log.txt
-      md5: 575f44e3235e469da7e2ff1671b932b3
-      size: 1425
+      md5: 53768f58ab154111f79775364587d429
+      size: 1410
     - path: ..\tools\tiler\update_gcbm_config.py
       md5: 3e04cbc0ee3588cc13f711750b8cda1e
       size: 18002
@@ -69,8 +69,8 @@ stages:
       size: 1023
     outs:
     - path: ..\logs\update_gcbm_config.log
-      md5: e38f055d2ca914502c9aec2beb8bd9d4
-      size: 614
+      md5: a70b253ff9e992c309e39c8fcb242cf1
+      size: 666
   run_gcbm:
     cmd: run_gcbm.bat
     deps:
@@ -148,3 +148,35 @@ stages:
     - path: ..\..\logs\compile_results.log
       md5: d1b66d9a696c715601c774347c9f31cb
       size: 1656
+  postprocessing:
+    cmd: Rscript Summarize_DOM_Stocks.R
+    deps:
+    - path: ../Standalone_GCBM/logs/compile_results.log
+      md5: d1b66d9a696c715601c774347c9f31cb
+      size: 1656
+    - path: ../Standalone_GCBM/processed_output/compiled_gcbm_output.db
+      md5: a8acd14fb99de0a213dd19cb931bec30
+      size: 413696
+    - path: Summarize_DOM_Stocks.R
+      md5: d5496cb991a16c8232f7725db13336f7
+      size: 6980
+    - path: Tables
+      md5: 970ecdb8275b1a25ceacf271eb6aed19.dir
+      size: 44485
+      nfiles: 12
+    outs:
+    - path: Figures/Carpathians_Sensitivity_BorealWet.png
+      md5: 3963c5830efcd8ec86e10a65f241b5e0
+      size: 82156
+    - path: Figures/Carpathians_Sensitivity_CoolTemperateMoist.png
+      md5: ee590d257c180cde5c0c390b72471dd4
+      size: 83055
+    - path: Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png
+      md5: 61d5696658e280fb5e695021433240f9
+      size: 82555
+    - path: Figures/Carpathians_Sensitivity_CoolTemperateWet.png
+      md5: d802bf0582f4f58a14e042551e5bb5f5
+      size: 83197
+    - path: Figures/Carpathians_Sensitivity_PolarRainTundra.png
+      md5: a3192f831f60e96af244a37e92b84966
+      size: 82184
