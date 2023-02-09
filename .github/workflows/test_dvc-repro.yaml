@@ -3,7 +3,6 @@ on: push
 jobs:
   run-on-vmhost:
     runs-on: [ubuntu-latest]
-    needs: run-on-container
     steps:
       - uses: r-lib/actions/setup-r@v2
         with:
