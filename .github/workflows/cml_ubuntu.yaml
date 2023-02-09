@@ -9,13 +9,14 @@ jobs:
         - "8080:8080"
     steps:
       - uses: actions/checkout@v3
-      - uses: iterative/setup-dvc@v1
           
       - name: Compile Results
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          dvc repro -s compile_results
+          cd Standalone_GCBM/tools/CompileGCBMResults
+
+          python3 compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
       
       - uses: actions/upload-artifact@v3
         with:

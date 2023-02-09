@@ -78,6 +78,7 @@ stages:
     - ../../gcbm_project/output/gcbm_output.db
     - ../../logs/create_tiffs.log
     - ../../processed_output/compiled_gcbm_output.db
+    - compileGCBMResults.bat
     - compileresults.json
     - compileresults.py
     outs:
