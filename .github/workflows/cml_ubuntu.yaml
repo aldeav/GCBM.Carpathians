@@ -9,14 +9,13 @@ jobs:
         - "8080:8080"
     steps:
       - uses: actions/checkout@v3
+      - uses: iterative/setup-dvc@v1
           
       - name: Compile Results
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd Standalone_GCBM/tools/CompileGCBMResults
-
-          python3 compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
+          dvc repro -s compile_results
       
       - uses: actions/upload-artifact@v3
         with:
@@ -32,6 +31,7 @@ jobs:
           r-version: '4.1.3'
       - uses: r-lib/actions/setup-renv@v2
       - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
