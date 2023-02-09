@@ -32,7 +32,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "## Figures created" > report.md
-          dvc plots show --show-md >> report.md 
+          dvc plots show >> report.md 
 
           cml comment create --pr=false report.md
         
