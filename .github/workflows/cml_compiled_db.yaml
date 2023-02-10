@@ -2,7 +2,7 @@ name: gcbm-Carpathians-ubuntu-CML
 on: 
   push:
     paths:
-      - "Standalone_GCBM\logs\compile_results.log"
+      - "Standalone_GCBM/logs/compile_results.log"
 jobs:
   run-on-container:
     runs-on: [ubuntu-latest]
