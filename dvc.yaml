@@ -1,44 +1,50 @@
+vars:
+  - python_path: python
+  - R_path: Rscript
+  - sim_start_year: '2010'
+  - sim_end_year: '2020'
+
 stages:
   tiler:
-    cmd: C:\Python37\python.exe ..\..\tools\Tiler\tiler.py
-    wdir: Standalone_GCBM\layers\tiled
+    cmd: python ../../tools/Tiler/tiler.py
+    wdir: Standalone_GCBM/layers/tiled
     deps:
-    - ..\..\tools\Tiler\tiler.py
-    - ..\raw\environment
-    - ..\raw\inventory
+    - ../../tools/Tiler/tiler.py
+    - ../raw/environment
+    - ../raw/inventory
     outs:
-    - ..\..\logs\tiler_log.txt
+    - ../../logs/tiler_log.txt
   recliner2gcbm_x64:
-    cmd: tools\Recliner2GCBM-x64\Recliner2GCBM.exe -c input_database\recliner2gcbm_config.json > logs\recliner_log.txt
+    cmd: tools/Recliner2GCBM-x64/Recliner2GCBM.exe -c input_database/recliner2gcbm_config.json > logs/recliner_log.txt
     wdir: Standalone_GCBM
     deps:
-    - logs\tiler_log.txt
-    - tools\recliner2gcbm-x64\recliner2gcbm.exe
-    - input_database\recliner2gcbm_config.json
-    - input_database\ArchiveIndex_Beta_Install.mdb
-    - input_database\Growth_Curves.csv
-    - input_database\gcbm_input.db
+    - logs/tiler_log.txt
+    - tools/recliner2gcbm-x64/recliner2gcbm.exe
+    - input_database/recliner2gcbm_config.json
+    - input_database/ArchiveIndex_Beta_Install.mdb
+    - input_database/Growth_Curves.csv
+    - input_database/gcbm_input.db
     outs:
-    - logs\recliner_log.txt
+    - logs/recliner_log.txt
   update_gcbm_configuration:
-    cmd: update_gcbm_configuration.bat
-    wdir: Standalone_GCBM\gcbm_project
+    cmd: ${python_path} ../tools/tiler/update_gcbm_config.py --layer_root ../layers/tiled --template_path templates --output_path . --input_db_path ../input_database/gcbm_input.db --start_year ${sim_start_year} --end_year ${sim_end_year} --log_path ../logs
+    wdir: Standalone_GCBM/gcbm_project
     deps:
-    - ..\logs\recliner_log.txt
+    - ../logs/recliner_log.txt
     - update_gcbm_configuration.bat
-    - ..\tools\tiler\update_gcbm_config.py
+    - ../tools/tiler/update_gcbm_config.py
     - templates
-    - ..\layers\tiled
-    - ..\input_database\gcbm_input.db
+    - ../layers/tiled
+    - ../input_database/gcbm_input.db
     outs:
-    - ..\logs\update_gcbm_config.log
+    - ../logs/update_gcbm_config.log
   run_gcbm:
-    cmd: run_gcbm.bat
-    wdir: Standalone_GCBM\gcbm_project
+    cmd: ../tools/GCBM/moja.cli.exe --config_file gcbm_config.cfg --config_provider provider_config.json
+    wdir: Standalone_GCBM/gcbm_project
     deps:
-    - ..\logs\update_gcbm_config.log
+    - ../logs/update_gcbm_config.log
     - run_gcbm.bat
-    - ..\tools\GCBM\moja.cli.exe
+    - ../tools/GCBM/moja.cli.exe
     - gcbm_config.cfg
     - localdomain.json
     - pools_cbm.json
@@ -48,32 +54,51 @@ stages:
     - variables.json
     - internal_variables.json
     - provider_config.json
-    - ..\layers\tiled\LifeZone_moja.tiff
-    - ..\layers\tiled\mean_annual_temperature_moja.tiff
-    - ..\input_database\gcbm_input.db
-    - output\gcbm_output.db
+    - ../layers/tiled/LifeZone_moja.tiff
+    - ../layers/tiled/mean_annual_temperature_moja.tiff
+    - ../input_database/gcbm_input.db
+    - output/gcbm_output.db
     outs:
-    - ..\logs\Moja_Debug.log
+    - ../logs/Moja_Debug.log
   create_tiffs:
-    cmd: create_tiffs.bat
-    wdir: Standalone_GCBM\tools\CompileGCBMSpatialOutput
+    cmd: ${python_path} create_tiffs.py --indicator_root ../../gcbm_project/output --start_year ${sim_start_year} --output_path ../../processed_output/spatial --log_path ../../logs --output_type tif
+    wdir: Standalone_GCBM/tools/CompileGCBMSpatialOutput
     deps:
-    - ..\..\logs\Moja_Debug.log
+    - ../../logs/Moja_Debug.log
     - create_tiffs.bat
     - create_tiffs.py
-    - ..\..\gcbm_project\output
+    - ../../gcbm_project/output
     outs:
-    - ..\..\logs\create_tiffs.log
-    - ..\..\processed_output\spatial
+    - ../../logs/create_tiffs.log
+    - ../../processed_output/spatial
   compile_results:
-    cmd: compileGCBMResults.bat
-    wdir: Standalone_GCBM\tools\CompileGCBMResults
+    cmd: ${python_path} compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
+    wdir: Standalone_GCBM/tools/CompileGCBMResults
     deps:
-    - ..\..\gcbm_project\output\gcbm_output.db
-    - ..\..\logs\create_tiffs.log
-    - ..\..\processed_output\compiled_gcbm_output.db
+    - ../../gcbm_project/output/gcbm_output.db
+    - ../../logs/create_tiffs.log
+    - ../../processed_output/compiled_gcbm_output.db
     - compileGCBMResults.bat
     - compileresults.json
     - compileresults.py
     outs:
-    - ..\..\logs\compile_results.log
+    - ../../logs/compile_results.log
+  postprocessing:
+    cmd: Rscript Summarize_DOM_Stocks.R
+    wdir: Postprocessing
+    deps:
+    - ../Standalone_GCBM/processed_output/compiled_gcbm_output.db
+    - ../Standalone_GCBM/logs/compile_results.log
+    - Summarize_DOM_Stocks.R
+    - Tables
+    plots:
+        - Figures/Carpathians_Sensitivity_BorealWet.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_CoolTemperateMoist.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_CoolTemperateSteppe.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_CoolTemperateWet.png:
+            cache: false
+        - Figures/Carpathians_Sensitivity_PolarRainTundra.png:
+            cache: false
