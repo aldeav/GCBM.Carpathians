@@ -149,7 +149,7 @@ stages:
       md5: d1b66d9a696c715601c774347c9f31cb
       size: 1656
   postprocessing:
-    cmd: Rscript Summarize_DOM_Stocks.R
+    cmd: "Rscript Summarize_DOM_Stocks.R\npython create_metrics.py\n"
     deps:
     - path: ../Standalone_GCBM/logs/compile_results.log
       md5: d1b66d9a696c715601c774347c9f31cb
@@ -158,12 +158,15 @@ stages:
       md5: a8acd14fb99de0a213dd19cb931bec30
       size: 413696
     - path: Summarize_DOM_Stocks.R
-      md5: d5496cb991a16c8232f7725db13336f7
+      md5: 2973b839d724e4e26c2f40379b00403c
       size: 6980
     - path: Tables
-      md5: 970ecdb8275b1a25ceacf271eb6aed19.dir
-      size: 44485
-      nfiles: 12
+      md5: ebf7ba088927b38d5c4989d7a7e2091d.dir
+      size: 34890
+      nfiles: 4
+    - path: create_metrics.py
+      md5: 6e8a4be32271cd164f3eb2f4a28066b0
+      size: 1155
     outs:
     - path: Figures/Carpathians_Sensitivity_BorealWet.png
       md5: 3963c5830efcd8ec86e10a65f241b5e0
@@ -180,3 +183,63 @@ stages:
     - path: Figures/Carpathians_Sensitivity_PolarRainTundra.png
       md5: a3192f831f60e96af244a37e92b84966
       size: 82184
+    - path: Metrics/Boreal_wet-Deadwood.json
+      md5: 32885e0eb26841d9efb9781940174a40
+      size: 146
+    - path: Metrics/Boreal_wet-Litter.json
+      md5: b8a3b33ad952a7a3147f3c3793e0ef3d
+      size: 144
+    - path: Metrics/Boreal_wet-Soil_Carbon.json
+      md5: bf9975357b73e28aa4337458dcd443fa
+      size: 145
+    - path: Metrics/Boreal_wet-Total_Biomass.json
+      md5: d845308dbe526a792d550570dabf7a74
+      size: 143
+    - path: Metrics/Cool_temperate_moist-Deadwood.json
+      md5: f4fa37952d7ddce50efb220c1f6e27c7
+      size: 146
+    - path: Metrics/Cool_temperate_moist-Litter.json
+      md5: 16684ecfe8c9983b7ba9eb71458034b9
+      size: 146
+    - path: Metrics/Cool_temperate_moist-Soil_Carbon.json
+      md5: 293733f4fde26aa406d87b07a10d3f02
+      size: 146
+    - path: Metrics/Cool_temperate_moist-Total_Biomass.json
+      md5: ffdaa6f83c9983eb4275b8e27db4a2d2
+      size: 144
+    - path: Metrics/Cool_temperate_steppe-Deadwood.json
+      md5: 698cbd26c4244bc6d9cc8b1cf5102685
+      size: 142
+    - path: Metrics/Cool_temperate_steppe-Litter.json
+      md5: ce9342f46894e6c7e45b2202b0f7901f
+      size: 141
+    - path: Metrics/Cool_temperate_steppe-Soil_Carbon.json
+      md5: a1ac2a813b6cfbe53c0e4ca91441afa6
+      size: 142
+    - path: Metrics/Cool_temperate_steppe-Total_Biomass.json
+      md5: 2bc5b7c7c82296897d6e7efc3aa2d747
+      size: 139
+    - path: Metrics/Cool_temperate_wet-Deadwood.json
+      md5: 6e1a983852e398b51f632120a32e1c95
+      size: 144
+    - path: Metrics/Cool_temperate_wet-Litter.json
+      md5: f4b82b3dd7162c3105227f77210dd965
+      size: 142
+    - path: Metrics/Cool_temperate_wet-Soil_Carbon.json
+      md5: 9a85db07d3335916554fa2993f67b032
+      size: 144
+    - path: Metrics/Cool_temperate_wet-Total_Biomass.json
+      md5: ec02ac84464a49a4b5a358ab45adff2a
+      size: 141
+    - path: Metrics/Polar_rain_tundra-Deadwood.json
+      md5: 67fa5b5482c32c792f599c7b76f1e1f5
+      size: 144
+    - path: Metrics/Polar_rain_tundra-Litter.json
+      md5: e8949778d2db6223ebc7d3ae82cd994f
+      size: 141
+    - path: Metrics/Polar_rain_tundra-Soil_Carbon.json
+      md5: 0ab71a7d5ed85475d4026288998cdf8e
+      size: 144
+    - path: Metrics/Polar_rain_tundra-Total_Biomass.json
+      md5: ad6e311875c059b8484ac2990c9652da
+      size: 141
