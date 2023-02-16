@@ -16,10 +16,11 @@ jobs:
       - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
 
-      - name: Renv restore
+      - name: Installations and renv restore
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
+          pip install pandas
           cd Postprocessing
           Rscript -e "renv::activate()"
           Rscript -e "renv::restore(lockfile = 'renv.lock')"
@@ -28,7 +29,6 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip install pandas
           dvc repro -s postprocessing
         
       - name: Display plots for DOM stocks
