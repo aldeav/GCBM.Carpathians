@@ -87,9 +87,9 @@ unique(pools_full$run)
 write_csv(pools_full,"./Tables/Pools_DOM_Sensitivity_full.csv")
 
 
-# Make a Table with the DOM stocks every 1 year, from 0 to 10 years old
+# Make a Table with the DOM stocks every 5 year, from 0 to 10 years old
 pools_summary <- pools_full %>% 
-  filter(year %in% seq(2010,2020,by=1)) %>% 
+  filter(year %in% seq(2010,2020,by=5)) %>% 
   mutate(Age = year - 2010) 
 
 for (ag in unique(pools_summary$Age)) {
