@@ -84,12 +84,15 @@ stages:
     outs:
     - ../../logs/compile_results.log
   postprocessing:
-    cmd: Rscript Summarize_DOM_Stocks.R
+    cmd: |
+      Rscript Summarize_DOM_Stocks.R
+      python create_metrics.py
     wdir: Postprocessing
     deps:
     - ../Standalone_GCBM/processed_output/compiled_gcbm_output.db
     - ../Standalone_GCBM/logs/compile_results.log
     - Summarize_DOM_Stocks.R
+    - create_metrics.py
     - Tables
     plots:
         - Figures/Carpathians_Sensitivity_BorealWet.png:
@@ -101,4 +104,45 @@ stages:
         - Figures/Carpathians_Sensitivity_CoolTemperateWet.png:
             cache: false
         - Figures/Carpathians_Sensitivity_PolarRainTundra.png:
+            cache: false
+    metrics:
+        - Metrics/Boreal_wet-Deadwood.json:
+            cache: false
+        - Metrics/Boreal_wet-Litter.json:
+            cache: false
+        - Metrics/Boreal_wet-Soil_Carbon.json:
+            cache: false
+        - Metrics/Boreal_wet-Total_Biomass.json:
+            cache: false
+        - Metrics/Cool_temperate_moist-Deadwood.json:
+            cache: false
+        - Metrics/Cool_temperate_moist-Litter.json:
+            cache: false
+        - Metrics/Cool_temperate_moist-Soil_Carbon.json:
+            cache: false
+        - Metrics/Cool_temperate_moist-Total_Biomass.json:
+            cache: false
+        - Metrics/Cool_temperate_steppe-Deadwood.json: 
+            cache: false
+        - Metrics/Cool_temperate_steppe-Litter.json:
+            cache: false
+        - Metrics/Cool_temperate_steppe-Soil_Carbon.json:
+            cache: false
+        - Metrics/Cool_temperate_steppe-Total_Biomass.json:
+            cache: false
+        - Metrics/Cool_temperate_wet-Deadwood.json:
+            cache: false
+        - Metrics/Cool_temperate_wet-Litter.json:
+            cache: false
+        - Metrics/Cool_temperate_wet-Soil_Carbon.json:
+            cache: false
+        - Metrics/Cool_temperate_wet-Total_Biomass.json:
+            cache: false
+        - Metrics/Polar_rain_tundra-Deadwood.json:
+            cache: false
+        - Metrics/Polar_rain_tundra-Litter.json:
+            cache: false
+        - Metrics/Polar_rain_tundra-Soil_Carbon.json:
+            cache: false
+        - Metrics/Polar_rain_tundra-Total_Biomass.json:
             cache: false
