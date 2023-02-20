@@ -13,6 +13,7 @@ result['pool_tc_per_ha_std'] = df.groupby(["LifeZone", "indicator"])['pool_tc_pe
 result['pool_tc_sum_mean'] = df.groupby(["LifeZone", "indicator"])['pool_tc_sum'].mean()
 result['area_sum_mean'] = df.groupby(["LifeZone", "indicator"])['area_sum'].mean()
 
+result = result.round(4)
 
 #Necessary formatting
 #Remove 'forest' for shorter names
