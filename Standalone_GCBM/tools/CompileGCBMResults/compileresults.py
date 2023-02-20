@@ -1,5 +1,5 @@
 import os
-import json
+import simplejson as json
 import logging
 import sys
 from string import Formatter

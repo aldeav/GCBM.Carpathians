@@ -9,7 +9,7 @@ jobs:
   run-on-container:
     runs-on: [ubuntu-latest]
     container: 
-      image: ghcr.io/moja-global/flint.gcbm:master
+      image: ghcr.io/moja-global/rest_api_gcbm:master
       ports:
         - "8080:8080"
     steps:
