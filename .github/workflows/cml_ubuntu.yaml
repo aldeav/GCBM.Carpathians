@@ -19,6 +19,8 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: 
+          cd Standalone_GCBM/gcbm_project
+          
           /opt/gcbm/moja.cli --config_file gcbm_config.cfg --config_provider provider_config.json
 
       - name: Compile Results
@@ -50,7 +52,7 @@ jobs:
       - uses: iterative/setup-cml@v1
       - uses: iterative/setup-dvc@v1
       - uses: actions/checkout@v3
-      
+
       - uses: actions/download-artifact@v3
         with:
           name: compiled-gcbm-output
