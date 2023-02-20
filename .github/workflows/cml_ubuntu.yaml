@@ -20,7 +20,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: 
           cd Standalone_GCBM/gcbm_project
-          
+
           /opt/gcbm/moja.cli --config_file gcbm_config.cfg --config_provider provider_config.json
 
       - name: Compile Results
@@ -29,7 +29,7 @@ jobs:
         run: |
           cd Standalone_GCBM/tools/CompileGCBMResults
 
-          python compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
+          python3 compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
       
       - uses: actions/upload-artifact@v3
         with:
