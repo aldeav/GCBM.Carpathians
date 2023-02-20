@@ -1,36 +1,34 @@
 vars:
   - python_path: python
   - R_path: Rscript
-  - sim_start_year: '2010'
-  - sim_end_year: '2020'
 
 stages:
   tiler:
-    cmd: python ../../tools/Tiler/tiler.py
-    wdir: Standalone_GCBM/layers/tiled
+    cmd: process_spatial_layers.bat
+    wdir: Standalone_GCBM/layers
     deps:
-    - ../../tools/Tiler/tiler.py
-    - ../raw/environment
-    - ../raw/inventory
+    - ../tools/Tiler/tiler.py
+    - raw/environment
+    - raw/inventory
     outs:
-    - ../../logs/tiler_log.txt
+    - ../logs/tiler_log.txt
   recliner2gcbm_x64:
-    cmd: tools/Recliner2GCBM-x64/Recliner2GCBM.exe -c input_database/recliner2gcbm_config.json > logs/recliner_log.txt
-    wdir: Standalone_GCBM
+    cmd: run_recliner2gcbm.bat
+    wdir: Standalone_GCBM/input_database
     deps:
-    - logs/tiler_log.txt
-    - tools/recliner2gcbm-x64/recliner2gcbm.exe
-    - input_database/recliner2gcbm_config.json
-    - input_database/ArchiveIndex_Beta_Install.mdb
-    - input_database/Growth_Curves.csv
-    - input_database/gcbm_input.db
+    - ../logs/tiler_log.txt
+    - ../tools/recliner2gcbm-x64/recliner2gcbm.exe
+    - recliner2gcbm_config.json
+    - ArchiveIndex_Beta_Install.mdb
+    - Growth_Curves.csv
+    - gcbm_input.db
     outs:
-    - logs/recliner_log.txt
+    - ../logs/recliner_log.log
   update_gcbm_configuration:
-    cmd: ${python_path} ../tools/tiler/update_gcbm_config.py --layer_root ../layers/tiled --template_path templates --output_path . --input_db_path ../input_database/gcbm_input.db --start_year ${sim_start_year} --end_year ${sim_end_year} --log_path ../logs
+    cmd: update_gcbm_configuration.bat
     wdir: Standalone_GCBM/gcbm_project
     deps:
-    - ../logs/recliner_log.txt
+    - ../logs/recliner_log.log
     - update_gcbm_configuration.bat
     - ../tools/tiler/update_gcbm_config.py
     - templates
@@ -39,7 +37,7 @@ stages:
     outs:
     - ../logs/update_gcbm_config.log
   run_gcbm:
-    cmd: ../tools/GCBM/moja.cli.exe --config_file gcbm_config.cfg --config_provider provider_config.json
+    cmd: run_gcbm.bat
     wdir: Standalone_GCBM/gcbm_project
     deps:
     - ../logs/update_gcbm_config.log
@@ -61,7 +59,7 @@ stages:
     outs:
     - ../logs/Moja_Debug.log
   create_tiffs:
-    cmd: ${python_path} create_tiffs.py --indicator_root ../../gcbm_project/output --start_year ${sim_start_year} --output_path ../../processed_output/spatial --log_path ../../logs --output_type tif
+    cmd: create_tiffs.bat
     wdir: Standalone_GCBM/tools/CompileGCBMSpatialOutput
     deps:
     - ../../logs/Moja_Debug.log
@@ -72,7 +70,7 @@ stages:
     - ../../logs/create_tiffs.log
     - ../../processed_output/spatial
   compile_results:
-    cmd: ${python_path} compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
+    cmd: CompileGCBMResults.bat
     wdir: Standalone_GCBM/tools/CompileGCBMResults
     deps:
     - ../../gcbm_project/output/gcbm_output.db
@@ -85,9 +83,8 @@ stages:
     - ../../logs/compile_results.log
   postprocessing:
     cmd: |
-      Rscript Summarize_DOM_Stocks.R
-      ls Tables
-      python create_metrics.py
+      ${R_path} Summarize_DOM_Stocks.R
+      ${python_path} create_metrics.py
     wdir: Postprocessing
     deps:
     - ../Standalone_GCBM/processed_output/compiled_gcbm_output.db
