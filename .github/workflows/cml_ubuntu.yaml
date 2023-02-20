@@ -15,14 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run GCBM
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: 
-          cd Standalone_GCBM/gcbm_project
-
-          /opt/gcbm/moja.cli --config_file gcbm_config.cfg --config_provider provider_config.json
-
       - name: Compile Results
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
