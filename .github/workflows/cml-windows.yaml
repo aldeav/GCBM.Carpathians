@@ -13,6 +13,14 @@ jobs:
         with:
           python-version: '3.7.9'
 
+      - name: Run GCBM
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          cd Standalone_GCBM/gcbm_project
+          run_gcbm.bat pythonLocation
+
       - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
