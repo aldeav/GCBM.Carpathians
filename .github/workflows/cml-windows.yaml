@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - Standalone_GCBM/input_database/gcbm_input.db
-      - test-cml-complete.txt
+      - test-windows-cml-complete.txt
 jobs:
   run:
     runs-on: [windows-latest]
