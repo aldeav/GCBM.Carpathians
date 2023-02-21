@@ -13,14 +13,6 @@ jobs:
         with:
           python-version: '3.7.9'
 
-      - name: Run GCBM
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
-        run: |
-          cd Standalone_GCBM/gcbm_project
-          run_gcbm.bat pythonLocation
-
       - name: Required Installations
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -30,6 +22,14 @@ jobs:
           del /q "C:\hostedtoolcache\windows\Python\3.7.9\x64\lib\site-packages\osgeo\gdalplugins\*.*"
           
           pip install -r installation\requirements-py37.txt
+
+      - name: Run GCBM
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
+        run: |
+          cd Standalone_GCBM/gcbm_project
+          run_gcbm.bat pythonLocation
 
       - name: Compile results
         env:

@@ -1,1 +1,1 @@
-Initial test for run gcbm with windows runner till the postprocessing - 6
+Initial test for run gcbm with windows runner till the postprocessing - 7
