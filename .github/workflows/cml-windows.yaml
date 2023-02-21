@@ -35,14 +35,13 @@ jobs:
         shell: cmd
         run: |
           cd Standalone_GCBM/tools/CompileGCBMResults
-          CompileGCBMResults.bat
+          python compileresults.py sqlite:///../../gcbm_project/output/gcbm_output.db --output_db sqlite:///../../processed_output/compiled_gcbm_output.db
 
       - name: Installations and renv restore
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
         run: | 
-          pip install pandas
           cd Postprocessing
           Rscript -e "renv::activate()"
           Rscript -e "renv::restore(lockfile = 'renv.lock')"
