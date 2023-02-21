@@ -29,18 +29,18 @@ jobs:
           
           pip install -r installation\requirements-py37.txt
 
-          pip freeze > result.txt
-
-      - name: dvc repro - compile_results
+      - name: Compile results
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
         run: |
-          dvc repro -s compile_results 
+          cd Standalone_GCBM/tools/CompileGCBMResults
+          CompileGCBMResults.bat
 
       - name: Installations and renv restore
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
         run: | 
           pip install pandas
           cd Postprocessing
@@ -50,12 +50,14 @@ jobs:
       - name: dvc repro - postprocessing
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
         run: |
           dvc repro -s postprocessing
 
       - name: Display plots for DOM stocks
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
         run: |
           dvc metrics diff --show-md > report.md
           echo "## Figures created" >> report.md
