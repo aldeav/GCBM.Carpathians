@@ -31,13 +31,6 @@ jobs:
 
           pip freeze > result.txt
 
-      - name: dvc repro - run_gcbm
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: cmd
-        run: |
-          dvc repro -s run_gcbm 
-
       - name: dvc repro - compile_results
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
