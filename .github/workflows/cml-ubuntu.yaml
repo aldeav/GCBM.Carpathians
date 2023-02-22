@@ -25,7 +25,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd Standalone_GCBM/gcbm_project
-          sudo ../tools/GCBM/moja.cli.exe --config_file gcbm_config.cfg --config_provider provider_config.json
+          sudo chmod +x ../tools/GCBM/moja.cli.exe --config_file gcbm_config.cfg --config_provider provider_config.json
 
       - name: Compile results
         env:
